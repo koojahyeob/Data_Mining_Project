@@ -37,37 +37,35 @@
 2. 알고리즘 별 clustering(K- means, K-medoids, DBSCAN, agglomerative, Mean shift) 각 feature pair 
 
 3. 전체 데이터로 clustering
-3.1 K-means 알고리즘의 scaler 별 실루엣 계수, dunn index 파악
-3.1.1 K-means , standard scaler 사용해 optimal k 로 clustering 2차원, 3차원(PCA 이용) plotting
-3.1.2  K-means , Robust scaler 사용해 optimal k 로 clustering 2차원, 3차원(PCA 이용) plotting
-3.1.3 K-means , Minmax scaler 사용해 optimal k 로 clustering 2차원, 3차원(PCA 이용) plotting
+   3.1 K-means 알고리즘의 scaler 별 실루엣 계수, dunn index 파악
+       3.1.1 K-means , standard scaler 사용해 optimal k 로 clustering 2차원, 3차원(PCA 이용) plotting
+       3.1.2  K-means , Robust scaler 사용해 optimal k 로 clustering 2차원, 3차원(PCA 이용) plotting
+       3.1.3 K-means , Minmax scaler 사용해 optimal k 로 clustering 2차원, 3차원(PCA 이용) plotting
 
-3.2 K-Medoids 알고리즘 사용 시 scaler 별 실루엣 계수, dunn index 파악
-3.2.1 K-Medoids, standard scaler 사용해 optimal k 로 clustering 2차원, 3차원(PCA 이용) plotting
-3.2.2 K-Medoids, Robust scaler 사용해 optimal k 로 clustering 2차원, 3차원(PCA 이용) plotting
-3.2.3 K-Medoids, Minmax scaler 사용해 optimal k 로 clustering 2차원, 3차원(PCA 이용) plotting
+    3.2 K-Medoids 알고리즘 사용 시 scaler 별 실루엣 계수, dunn index 파악
+        3.2.1 K-Medoids, standard scaler 사용해 optimal k 로 clustering 2차원, 3차원(PCA 이용) plotting
+        3.2.2 K-Medoids, Robust scaler 사용해 optimal k 로 clustering 2차원, 3차원(PCA 이용) plotting
+        3.2.3 K-Medoids, Minmax scaler 사용해 optimal k 로 clustering 2차원, 3차원(PCA 이용) plotting
 
-3.3 DBSCAN 사용 시 알고리즘 사용 시 scaler 별 실루엣 계수, dunn index 파악
-3.3.1 DBSCAN , standard scaler 사용해 optimal eps와 min_samples 로 cluster plotting (with PCA)
-3.3.2 DBSCAN , Robust scaler 사용해 optimal eps와 min_samples 로 cluster plotting (with PCA)
-3.3.3 DBSCAN, Minmax scaler 사용해 optimal eps와 min_samples 로 cluster plotting (with PCA)
+   3.3 DBSCAN 사용 시 알고리즘 사용 시 scaler 별 실루엣 계수, dunn index 파악
+        3.3.1 DBSCAN , standard scaler 사용해 optimal eps와 min_samples 로 cluster plotting (with PCA)
+        3.3.2 DBSCAN , Robust scaler 사용해 optimal eps와 min_samples 로 cluster plotting (with PCA)
+        3.3.3 DBSCAN, Minmax scaler 사용해 optimal eps와 min_samples 로 cluster plotting (with PCA)
 
-3.4 Mean Shifts 사용 시 scaler 별 실루엣 계수, dunn index 파악
-3.4.1 Mean Shifts, standard scaler 사용해 optimal band_width로 cluster plotting (with PCA)
-3.4.2 Mean Shifts, Robust scaler 사용해 optimal band_width로 cluster plotting (with PCA)
-3.4.3 Mean Shifts, Minmax scaler 사용해 optimal band_width로 cluster plotting (with PCA)
+    3.4 Mean Shifts 사용 시 scaler 별 실루엣 계수, dunn index 파악
+        3.4.1 Mean Shifts, standard scaler 사용해 optimal band_width로 cluster plotting (with PCA)
+        3.4.2 Mean Shifts, Robust scaler 사용해 optimal band_width로 cluster plotting (with PCA)
+        3.4.3 Mean Shifts, Minmax scaler 사용해 optimal band_width로 cluster plotting (with PCA)
 
-3.5 Agglomerative clustering 사용 시 scaler 별 실루엣 계수, 던 인덱스 -> k도출 및 pca
-<덴드로그램을 통해 k를 4로 하는 게 가장 적절한 군집 수라고 판단 >
+    3.5 Agglomerative clustering 사용 시 scaler 별 실루엣 계수, 던 인덱스, dendrogram -> k도출 및 pca
+        3.5.1 Agglomerative, standard scaler 사용해 optimal한 distance로 k 값 설정해서 cluster plotting (with PCA)
+        3.5.2  Agglomerative, Robust scaler 사용해 optimal한 distance로 k 값 설정해서 cluster plotting (with PCA)
+        3.5.3  Agglomerative, Minmax scaler 사용해 optimal한 distance로 k 값 설정해서 cluster plotting (with PCA)
 
-3.5.1 Agglomerative, standard scaler 사용해 optimal한 distance로 k 값 설정해서 cluster plotting (with PCA)
-3.5.2  Agglomerative, Robust scaler 사용해 optimal한 distance로 k 값 설정해서 cluster plotting (with PCA)
-3.5.3  Agglomerative, Minmax scaler 사용해 optimal한 distance로 k 값 설정해서 cluster plotting (with PCA)
-
-3.6 최종 모델 선택
-3.6.1 standard scaler 이용한 Agglomerative clustering 선택
-<실루엣계수, 던 인덱스가 다른 모델들과 비교 했을 때 비슷한 점수를 가지면서 PCA를 통해 봤을 때 가장 적절하게 나뉘었다고 판단 + tableaur를 통해 본 cluster 결과가 가장 납득되는 결과였음> 
-3.6.2 최종 모델 학습 및 결과 저장
+4. 최종 모델 선택
+   4.1 standard scaler 이용한 Agglomerative clustering 선택
+        <실루엣계수, 던 인덱스가 다른 모델들과 비교 했을 때 비슷한 점수를 가지면서 PCA를 통해 봤을 때 가장 적절하게 나뉘었다고 판단 + tableaur를 통해 본 cluster 결과가 가장 납득되는 결과였음>
+   4.2 최종 모델 학습 및 결과 저장
 
 ## 결과
 시군구별로 각 특징에 대해 상/중상/중/하 의 등급을 매겼다.
