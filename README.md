@@ -37,9 +37,17 @@
 2. 알고리즘 별 clustering(K- means, K-medoids, DBSCAN, agglomerative, Mean shift) 각 feature pair 
 
 3. 전체 데이터로 clustering
+
+   
    3.1 K-means 알고리즘의 scaler 별 실루엣 계수, dunn index 파악
+
+   
        3.1.1 K-means , standard scaler 사용해 optimal k 로 clustering 2차원, 3차원(PCA 이용) plotting
+
+   
        3.1.2  K-means , Robust scaler 사용해 optimal k 로 clustering 2차원, 3차원(PCA 이용) plotting
+
+   
        3.1.3 K-means , Minmax scaler 사용해 optimal k 로 clustering 2차원, 3차원(PCA 이용) plotting
 
     3.2 K-Medoids 알고리즘 사용 시 scaler 별 실루엣 계수, dunn index 파악
@@ -62,7 +70,7 @@
         3.5.2  Agglomerative, Robust scaler 사용해 optimal한 distance로 k 값 설정해서 cluster plotting (with PCA)
         3.5.3  Agglomerative, Minmax scaler 사용해 optimal한 distance로 k 값 설정해서 cluster plotting (with PCA)
 
-4. 최종 모델 선택
+5. 최종 모델 선택
    4.1 standard scaler 이용한 Agglomerative clustering 선택
         <실루엣계수, 던 인덱스가 다른 모델들과 비교 했을 때 비슷한 점수를 가지면서 PCA를 통해 봤을 때 가장 적절하게 나뉘었다고 판단 + tableaur를 통해 본 cluster 결과가 가장 납득되는 결과였음>
    4.2 최종 모델 학습 및 결과 저장
