@@ -57,11 +57,16 @@ EDA (탐색적 데이터 분석)
 | 학교 숲 | 상          | 하          | 상          | 중상        |
 | 학원     | 중상        | 중상        | 하          | 상          |
 
+<img width="866" alt="클러스터2" src="https://github.com/koojahyeob/Data_Mining_Project/assets/155933613/cb3865c3-7049-4b6b-ae99-388de603065a">
+<img width="866" alt="클러스터4" src="https://github.com/koojahyeob/Data_Mining_Project/assets/155933613/f830acd2-ff6a-4f5d-b7c2-372457022dc8">
+
 **Cluster 2, 4 - 가장 잘 사는 지역 과세**
 - 맞벌이 비율은 낮지만 과세(소득), 아파트 등이 매우 높다. → 소득 수준이 높다고 판단된다.
 - 높은 소아과의 비율로 보아 인프라 구축이 잘 되어 있다.
 - pc방 도서관 학원등 편의시설 → 방과후 시간 이후 보낼 수 있는 상호보완적 관계이며 다 합해서 어느 정도 적당히 충족되어있다고 판단된다.
   → 따라서 돌봄 교실 확대 우선순위 대상이 아니다.
+
+<img width="866" alt="클러스터3" src="https://github.com/koojahyeob/Data_Mining_Project/assets/155933613/6e51d7b9-e3fc-4b7b-8a0a-169439258e44">
 
 **Cluster 3**
 - Cluster 1과 비교
@@ -69,6 +74,8 @@ EDA (탐색적 데이터 분석)
 - 지역 자체의 특성이 시골이며 초등학생의 수가 현저히 적다.
 - 돌봄 서비스 자체가 적은 규모로 이루어지고 있으며 돌봄 인력 추가시 얻을 효용이 적다
   → 따라서 돌봄 교실 확대 우선순위 대상이 아니다.
+
+<img width="866" alt="클러스터1" src="https://github.com/koojahyeob/Data_Mining_Project/assets/155933613/dab67b5f-0863-4d47-8d2a-521c37175ca6">
 
 **Cluster 1**
 - 맞벌이 비율(중상)은 높지만 과세는 낮다 (하) → 소득 수준이 낮다고 판단된다.
