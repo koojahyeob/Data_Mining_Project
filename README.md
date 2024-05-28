@@ -35,7 +35,14 @@
         1.4 box plot
         1.5 scaling
 
+- EDA를 진행하여 feature들 간의 상관관계, 분포 및 이상치를 확인해 보았다.
+- 분포의 비대칭성을 해결하기 위해 로그 변환을 수행하였으나 차이가 미미하고 Clustering 결과의 차이가 없어 기존의 데이터를 활용하기로 하였다.
+- 초등학생 수 대비 학교 숲 비율에 진천군 데이터가 이상치를 보였으나 학교 근처의 숲과 논이 많은 즉, 지역적 특성임을 고려하여 제거하지 않고 사용하였다.
+- 데이터들의 분포 및 값의 범위가 다르기 때문에 scaling을 진행하였고 다양한 scaler 중에 실루엣 스코어를 척도한 결과 최종적으로 standard scaler 사용하기로 하였다.
+
 2. clustering 알고리즘(K- means, K-medoids, DBSCAN, agglomerative, Mean shift)별  각 feature pair 
+
+- 데이터를 다각도로 분석하고 가장 적합한 클러스터링 알고리즘과 feature 조합을 예상해볼 수 있도록 K-means, K-medoids, DBSCAN, Mean Shift, Agglomerative 클러스터링을 비교하였다.
 
 3. 전체 데이터로 clustering
   
@@ -64,12 +71,28 @@
            3.5.2  Agglomerative, Robust scaler 사용, dendrogram 통해 optimal한 distance로 k 값 설정해서 cluster plotting (with PCA)
            3.5.3  Agglomerative, Minmax scaler 사용, dendrogram 통해 optimal한 distance로 k 값 설정해서 cluster plotting (with PCA)
 
+- 다양한 알고리즘에 대해 다양한 스케일링 방법을 사용하여 클러스터링 결과를 비교함으로써, 최적의 데이터 전처리 방법을 결정하고, 이를 통해 가장 효과적인 클러스터링 결과를 도출한다. 실루엣 계수와 Dunn Index를 사용하여 클러스터링 품질을 정량적으로 평가하고, 최적의 k 값을 찾는 과정을 통해 데이터의 특성에 가장 적합한 클러스터링 설정을 선택한다.
+
 4. 최종 모델 선택
-   
-       4.1 standard scaler 이용한 Agglomerative clustering 선택
-           4.1.1실루엣계수, 던 인덱스가 다른 모델들과 비교 했을 때 비슷한 점수를 가지면서 PCA를 통해 봤을 때 가장 적절하게 나뉘었다고 판단 + tableaur를 통해 본 cluster 결과가 가장 납득되는 결과였음
-       4.2 최종 모델 학습 및 결과 저장
-   
+Standard Scaler로 스케일링한 후, k=4인 Agglomerative Clustering 모델을 선택 하였다.
+
+**이유**
+- PCA를 통해 3차원으로 축소하여 본 클러스터가 가장 잘 묶임.
+- 실루엣 스코어에서 가장 좋은 점수를 얻음.
+- 덴드로그램을 통해 시각적으로 클러스터가 잘 묶였음을 확인.
+- 태블로를 통해 클러스터 결과를 시각화한 결과 가장 납득할만 했음.
+
+**다른 모델과의 비교**
+1. standard Scaling
+- K-means와 K-medoids: 실루엣, Dunn Index 점수가 Agglomerative에 비해 낮음.
+- DBSCAN, Mean Shift: PCA로 3차원 축소 후 클러스터링 결과가 좋지 않음.
+
+2. Robust Scaling
+- 전체적으로 모든 모델이 PCA 통해서 3차원 축소해본 결과가 별로 좋지 않았음.
+
+3. MinMax Scaling
+- K-medoids가 PCA로 본 결과 좋았으나, 태블로로 시각화한 결과 Agglomerative만큼 설명력이 높지 않음.
+
 
 ## 결과
 시군구별로 각 특징에 대해 상/중상/중/하 의 등급을 매겼다.
