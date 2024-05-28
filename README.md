@@ -118,6 +118,8 @@ Standard Scaler로 스케일링한 후, k=4인 Agglomerative Clustering 모델�
 <img width="300" alt="클러스터2" src="https://github.com/koojahyeob/Data_Mining_Project/assets/155933613/cb3865c3-7049-4b6b-ae99-388de603065a">
 <img width="300" alt="클러스터4" src="https://github.com/koojahyeob/Data_Mining_Project/assets/155933613/f830acd2-ff6a-4f5d-b7c2-372457022dc8">
 
+######      Cluster 2 - 고소득 중형 도시군        Cluster 4 - 메트로폴리스 군집
+
 **Cluster 2, 4 - 가장 잘 사는 지역 과세**
 - 맞벌이 비율은 낮지만 과세(소득), 아파트 등이 매우 높다. → 소득 수준이 높다고 판단된다.
 - 높은 소아과의 비율로 보아 인프라 구축이 잘 되어 있다.
@@ -126,6 +128,7 @@ Standard Scaler로 스케일링한 후, k=4인 Agglomerative Clustering 모델�
 
 <img width="300" alt="클러스터3" src="https://github.com/koojahyeob/Data_Mining_Project/assets/155933613/6e51d7b9-e3fc-4b7b-8a0a-169439258e44">
 
+######     Cluster 3 - 평균 소득 농업 군집
 **Cluster 3**
 - 맞벌이 비율은 높지만, 회사보단 1차 산업에 종사하며 맞벌이 하는 경우가 많아 맞벌이로 인한 돌봄공백이 적용되지 않는다.
 - 그러나 아파트 비율, 소득이 상대적으로 낮다.
@@ -134,6 +137,7 @@ Standard Scaler로 스케일링한 후, k=4인 Agglomerative Clustering 모델�
 
 <img width="300" alt="클러스터1" src="https://github.com/koojahyeob/Data_Mining_Project/assets/155933613/dab67b5f-0863-4d47-8d2a-521c37175ca6">
 
+######     Cluster 1 - 도농 혼합 저소득 군집
 **Cluster 1**
 - 맞벌이 비율(중상)은 높지만 과세는 낮다 (하) → 소득 수준이 낮다고 판단된다.
 - 소아과가 아예 없는 지역들도 있다 → 인프라가 낙후되어 있다.
