@@ -27,7 +27,7 @@
 결측치 처리 및 변수 변환을 통해 분석에 적합한 형태로 데이터를 전처리했습니다.
 
 ## 분석
-###1. EDA
+1. EDA
    
         1.1 heatmap 출력
         1.2 feature distribution
@@ -35,7 +35,7 @@
         1.4 box plot
         1.5 scaling
 
-#### 1.1 heatmap 출력
+### 1.1 heatmap 출력
 ```python
 from IPython.display import display, HTML
 import seaborn as sns
@@ -348,6 +348,8 @@ for page in range(num_pages):
            3.1.1 K-means , standard scaler 사용해 optimal k 로 clustering 2차원, 3차원(PCA 이용) plotting
            3.1.2  K-means , Robust scaler 사용해 optimal k 로 clustering 2차원, 3차원(PCA 이용) plotting
            3.1.3 K-means , Minmax scaler 사용해 optimal k 로 clustering 2차원, 3차원(PCA 이용) plotting
+
+
 
         3.2 K-Medoids 알고리즘 사용 시 scaler 별 실루엣 계수, dunn index 파악
            3.2.1 K-Medoids, standard scaler 사용해 optimal k 로 clustering 2차원, 3차원(PCA 이용) plotting
