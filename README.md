@@ -27,7 +27,7 @@
 결측치 처리 및 변수 변환을 통해 분석에 적합한 형태로 데이터를 전처리했습니다.
 
 ## 분석
-1. EDA
+###1. EDA
    
         1.1 heatmap 출력
         1.2 feature distribution
@@ -35,7 +35,7 @@
         1.4 box plot
         1.5 scaling
 
-### 1.1 heatmap 출력
+#### 1.1 heatmap 출력
 ```python
 from IPython.display import display, HTML
 import seaborn as sns
