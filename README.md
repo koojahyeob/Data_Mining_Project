@@ -81,7 +81,7 @@ def eda(df):
     sns.heatmap(correlation_matrix, annot=True, cmap='coolwarm', linewidths=0.5, fmt='.2f', annot_kws={"size": 10, "color": "black"})
     plt.show()
     print("==================================================================")
-
+```
 
 3. clustering 알고리즘(K- means, K-medoids, DBSCAN, agglomerative, Mean shift)별  각 feature pair 
 
