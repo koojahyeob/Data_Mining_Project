@@ -82,10 +82,267 @@ def eda(df):
     plt.show()
     print("==================================================================")
 ```
+### 1.2 feature distribution
+```import numpy as np
+import pandas as pd
+import seaborn as sns
+import matplotlib.pyplot as plt
 
-3. clustering 알고리즘(K- means, K-medoids, DBSCAN, agglomerative, Mean shift)별  각 feature pair 
+# 원본 데이터프레임의 컬럼 분포 확인
+columns_to_visualize = df.columns
 
-4. 전체 데이터로 clustering
+plt.figure(figsize=(15, 10))
+for i, col in enumerate(columns_to_visualize, 1):
+    plt.subplot(3, 3, i)
+    sns.histplot(df[col], bins=30, kde=True)
+    plt.title(f'{col}의 분포')
+    plt.tight_layout()
+
+plt.show()
+
+# 로그 변환
+df_log_transformed = df.apply(lambda x: np.log1p(x))
+
+# 로그 변환된 데이터프레임의 컬럼 분포 확인
+plt.figure(figsize=(15, 10))
+for i, col in enumerate(df_log_transformed.columns, 1):
+    plt.subplot(3, 3, i)
+    sns.histplot(df_log_transformed[col], bins=30, kde=True)
+    plt.title(f'{col}의 로그 변환 후 분포')
+    plt.tight_layout()
+
+plt.show()
+```
+### 1.3 scatter plot
+```# 산점도 행렬 그리기
+sns.pairplot(df)
+plt.suptitle('Scatter Plot Matrix', y=1.02)
+plt.show()
+```
+
+### 1.4 box plot
+```# 박스플롯 그리기
+plt.figure(figsize=(16, 10))
+
+for i, column in enumerate(df_log_transformed.columns, 1):
+    plt.subplot(2, 4, i)  # 2행 4열의 서브플롯에 그래프를 배치
+    sns.boxplot(data=df[column])
+    plt.title(column)
+
+plt.tight_layout()
+plt.show()
+```
+
+### 1.5 scaling
+```from sklearn.preprocessing import RobustScaler, MinMaxScaler, StandardScaler
+
+standard_scaler = StandardScaler()
+standard_scaled = standard_scaler.fit_transform(df)
+
+robust_scaler = RobustScaler()
+robust_scaled = robust_scaler.fit_transform(df)
+
+# MinMaxScaler를 사용한 스케일링
+minmax_scaler = MinMaxScaler()
+minmax_scaled = minmax_scaler.fit_transform(df)
+```
+
+2. clustering 알고리즘(K- means, K-medoids, DBSCAN, agglomerative, Mean shift)별  각 feature pair 
+### K-Means
+```
+import itertools
+
+standard_scaler = StandardScaler()
+df_scaled = standard_scaler.fit_transform(df)
+
+# 모든 피처 쌍 생성
+feature_combinations = list(itertools.combinations(df.columns, 2))
+
+# 클러스터링 및 시각화
+plots_per_page = 4  # 한 페이지에 표시할 플롯 수
+num_pages = (len(feature_combinations) + plots_per_page - 1) // plots_per_page
+
+for page in range(num_pages):
+    plt.figure(figsize=(15, 15))
+    start_index = page * plots_per_page
+    end_index = min(start_index + plots_per_page, len(feature_combinations))
+    for i, (feat1, feat2) in enumerate(feature_combinations[start_index:end_index], 1):
+        # 피처 쌍 선택
+        X = df_scaled[:, [df.columns.get_loc(feat1), df.columns.get_loc(feat2)]]
+        
+        # KMeans 클러스터링 수행
+        kmeans = KMeans(n_clusters=5, random_state=0).fit(X)
+        labels = kmeans.labels_
+        
+        # 클러스터링 결과 시각화
+        plt.subplot(2, 2, i)
+        sns.scatterplot(x=X[:, 0], y=X[:, 1], hue=labels, palette='viridis')
+        plt.xlabel(feat1)
+        plt.ylabel(feat2)
+        plt.title(f'Clustering of {feat1} and {feat2}')
+        plt.tight_layout()
+    
+    plt.suptitle(f'Page {page + 1}')
+    plt.show()
+```
+### K-Medoids
+```from sklearn_extra.cluster import KMedoids
+# 모든 피처 쌍 생성
+feature_combinations = list(itertools.combinations(df.columns, 2))
+
+# 클러스터링 및 시각화
+plots_per_page = 4  # 한 페이지에 표시할 플롯 수
+num_pages = (len(feature_combinations) + plots_per_page - 1) // plots_per_page
+
+for page in range(num_pages):
+    plt.figure(figsize=(15, 15))
+    start_index = page * plots_per_page
+    end_index = min(start_index + plots_per_page, len(feature_combinations))
+    for i, (feat1, feat2) in enumerate(feature_combinations[start_index:end_index], 1):
+        # 피처 쌍 선택
+        X = df_scaled[:, [df.columns.get_loc(feat1), df.columns.get_loc(feat2)]]
+        
+        # KMedoids 클러스터링 수행
+        kmedoids = KMedoids(n_clusters=5, random_state=0).fit(X)
+        labels = kmedoids.labels_
+        
+        # 클러스터링 결과 시각화
+        plt.subplot(2, 2, i)
+        sns.scatterplot(x=X[:, 0], y=X[:, 1], hue=labels, palette='viridis')
+        plt.xlabel(feat1)
+        plt.ylabel(feat2)
+        plt.title(f'Clustering of {feat1} and {feat2}')
+        plt.tight_layout()
+    
+    plt.suptitle(f'Page {page + 1}')
+    plt.show()
+```
+### DBSCAN
+```from sklearn.cluster import DBSCAN
+from sklearn.model_selection import ParameterGrid
+
+# 모든 피처 쌍 생성
+feature_combinations = list(itertools.combinations(df.columns, 2))
+
+# 데이터 스케일링
+scaler = StandardScaler()
+df_scaled = scaler.fit_transform(df)
+
+# 모든 피처 쌍 생성
+feature_combinations = list(itertools.combinations(df.columns, 2))
+
+# 클러스터링 및 시각화
+plots_per_page = 4  # 한 페이지에 표시할 플롯 수
+num_pages = (len(feature_combinations) + plots_per_page - 1) // plots_per_page
+
+for page in range(num_pages):
+    plt.figure(figsize=(15, 15))
+    start_index = page * plots_per_page
+    end_index = min(start_index + plots_per_page, len(feature_combinations))
+    for i, (feat1, feat2) in enumerate(feature_combinations[start_index:end_index], 1):
+        # 피처 쌍 선택
+        X = df_scaled[:, [df.columns.get_loc(feat1), df.columns.get_loc(feat2)]]
+        
+        # DBSCAN 클러스터링 수행
+        dbscan = DBSCAN(eps=0.5, min_samples=5).fit(X)
+        labels = dbscan.labels_
+        
+        # 클러스터링 결과 시각화
+        plt.subplot(2, 2, i)
+        sns.scatterplot(x=X[:, 0], y=X[:, 1], hue=labels, palette='viridis', legend=None)
+        plt.xlabel(feat1)
+        plt.ylabel(feat2)
+        plt.title(f'Clustering of {feat1} and {feat2} (DBSCAN)')
+        plt.tight_layout()
+    
+    plt.suptitle(f'Page {page + 1}')
+    plt.show()
+```
+### Agglomerative
+```from sklearn.cluster import AgglomerativeClustering
+# 모든 피처 쌍 생성
+feature_combinations = list(itertools.combinations(df.columns, 2))
+
+# 클러스터링 및 시각화
+plots_per_page = 4  # 한 페이지에 표시할 플롯 수
+num_pages = (len(feature_combinations) + plots_per_page - 1) // plots_per_page
+
+for page in range(num_pages):
+    plt.figure(figsize=(15, 15))
+    start_index = page * plots_per_page
+    end_index = min(start_index + plots_per_page, len(feature_combinations))
+    for i, (feat1, feat2) in enumerate(feature_combinations[start_index:end_index], 1):
+        # 피처 쌍 선택
+        X = df_scaled[:, [df.columns.get_loc(feat1), df.columns.get_loc(feat2)]]
+        
+        # Agglomerative 클러스터링 수행
+        agglomerative = AgglomerativeClustering(n_clusters=5)
+        labels = agglomerative.fit_predict(X)
+        
+        # 클러스터링 결과 시각화
+        plt.subplot(2, 2, i)
+        sns.scatterplot(x=X[:, 0], y=X[:, 1], hue=labels, palette='viridis')
+        plt.xlabel(feat1)
+        plt.ylabel(feat2)
+        plt.title(f'Clustering of {feat1} and {feat2}')
+        plt.tight_layout()
+    
+    plt.suptitle(f'Page {page + 1}')
+    plt.show()
+```
+### MeanShift
+```from sklearn.cluster import MeanShift, estimate_bandwidth
+# 모든 피처 쌍 생성
+feature_combinations = list(itertools.combinations(df.columns, 2))
+
+# 그리드 서치를 위한 파라미터 그리드 설정
+param_grid = {
+    'bandwidth': np.linspace(0.1, 1.0, 10)
+}
+
+# 최적의 파라미터를 찾는 함수
+def find_best_params(X, param_grid):
+    best_score = -1
+    best_params = None
+    for params in ParameterGrid(param_grid):
+        mean_shift = MeanShift(bandwidth=params['bandwidth'])
+        labels = mean_shift.fit_predict(X)
+        if len(set(labels)) > 1:
+            score = silhouette_score(X, labels)
+            if score > best_score:
+                best_score = score
+                best_params = params
+    return best_params
+
+# 클러스터링 및 시각화
+plots_per_page = 4  # 한 페이지에 표시할 플롯 수
+num_pages = (len(feature_combinations) + plots_per_page - 1) // plots_per_page
+
+for page in range(num_pages):
+    plt.figure(figsize=(15, 15))
+    start_index = page * plots_per_page
+    end_index = min(start_index + plots_per_page, len(feature_combinations))
+    for i, (feat1, feat2) in enumerate(feature_combinations[start_index:end_index], 1):
+        # 피처 쌍 선택
+        X = df_scaled[:, [df.columns.get_loc(feat1), df.columns.get_loc(feat2)]]
+        
+        # 최적의 하이퍼파라미터 찾기
+        best_params = find_best_params(X, param_grid)
+        mean_shift = MeanShift(bandwidth=best_params['bandwidth'])
+        labels = mean_shift.fit_predict(X)
+        
+        # 클러스터링 결과 시각화
+        plt.subplot(2, 2, i)
+        sns.scatterplot(x=X[:, 0], y=X[:, 1], hue=labels, palette='viridis', legend=None)
+        plt.xlabel(feat1)
+        plt.ylabel(feat2)
+        plt.title(f'Clustering of {feat1} and {feat2} (Mean Shift)')
+        plt.tight_layout()
+    
+    plt.suptitle(f'Page {page + 1}')
+    plt.show()
+```
+3. 전체 데이터로 clustering
   
        3.1 K-means 알고리즘의 scaler 별 실루엣 계수, dunn index 파악
            3.1.1 K-means , standard scaler 사용해 optimal k 로 clustering 2차원, 3차원(PCA 이용) plotting
@@ -112,7 +369,7 @@ def eda(df):
            3.5.2  Agglomerative, Robust scaler 사용, dendrogram 통해 optimal한 distance로 k 값 설정해서 cluster plotting (with PCA)
            3.5.3  Agglomerative, Minmax scaler 사용, dendrogram 통해 optimal한 distance로 k 값 설정해서 cluster plotting (with PCA)
 
-5. 최종 모델 선택
+4. 최종 모델 선택
    
        4.1 standard scaler 이용한 Agglomerative clustering 선택
            4.1.1실루엣계수, 던 인덱스가 다른 모델들과 비교 했을 때 비슷한 점수를 가지면서 PCA를 통해 봤을 때 가장 적절하게 나뉘었다고 판단 + tableaur를 통해 본 cluster 결과가 가장 납득되는 결과였음
