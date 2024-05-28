@@ -35,6 +35,54 @@
         1.4 box plot
         1.5 scaling
 
+### 1.1 heatmap 출력
+```python
+from IPython.display import display, HTML
+import seaborn as sns
+import random
+import matplotlib.pyplot as plt
+import plotly.express as px
+import matplotlib.font_manager as fm
+import pandas as pd
+import numpy as np
+
+font_path = 'C:\Windows\Fonts\MALGUNBD.TTF'
+font_prop = fm.FontProperties(fname=font_path)
+plt.rc('font', family=font_prop.get_name())
+plt.rcParams['axes.unicode_minus'] = False  # 마이너스 기호 깨짐 방지
+
+def eda(df):
+    print("==================================================================")
+    print("1. Dataframe Shape: ", df.shape)
+    print("==================================================================")
+    print("2. Explore the Data: ")
+    display(HTML(df.head(5).to_html()))
+    print("==================================================================")
+    print("3. Information on the Data: ")
+    data_info_df = pd.DataFrame(df.dtypes, columns=['data type'])
+    data_info_df['Duplicated_Values'] = df.duplicated().sum()
+    data_info_df['Missing_Values'] = df.isnull().sum().values
+    data_info_df['%Missing'] = df.isnull().sum().values / len(df) * 100
+    data_info_df['Unique_Values'] = df.nunique().values
+    df_desc = df.describe(include='all').transpose()
+    data_info_df['Count'] = df_desc['count'].values
+    data_info_df['Mean'] = df_desc['mean'].values
+    data_info_df['STD'] = df_desc['std'].values
+    data_info_df['Min'] = df_desc['min'].values
+    data_info_df['Max'] = df_desc['max'].values
+    data_info_df = data_info_df[['Count', 'Mean', 'STD', 'Min', 'Max', 'Duplicated_Values', 'Missing_Values',
+                                 '%Missing', 'Unique_Values']]
+    display(HTML(data_info_df.to_html()))
+    print("==================================================================")
+    print("4. Correlation Matrix Heatmap - For Numeric Variables:")
+    num_cols = df.select_dtypes(include=['float64', 'int64']).columns.tolist()
+    correlation_matrix = df[num_cols].corr()
+    plt.figure(figsize=(12, 8))
+    sns.heatmap(correlation_matrix, annot=True, cmap='coolwarm', linewidths=0.5, fmt='.2f', annot_kws={"size": 10, "color": "black"})
+    plt.show()
+    print("==================================================================")
+
+
 3. clustering 알고리즘(K- means, K-medoids, DBSCAN, agglomerative, Mean shift)별  각 feature pair 
 
 4. 전체 데이터로 clustering
