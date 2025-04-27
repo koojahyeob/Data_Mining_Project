@@ -116,9 +116,9 @@ Standard Scaler로 스케일링한 후, k=4인 Agglomerative Clustering 모델�
 | 학원     | 중상        | 중상        | 하          | 상          |
 
 <img width="300" alt="클러스터2" src="https://github.com/koojahyeob/Data_Mining_Project/assets/155933613/cb3865c3-7049-4b6b-ae99-388de603065a">
+######      Cluster 2 - 고소득 중형 도시군 
 <img width="300" alt="클러스터4" src="https://github.com/koojahyeob/Data_Mining_Project/assets/155933613/f830acd2-ff6a-4f5d-b7c2-372457022dc8">
-
-######      Cluster 2 - 고소득 중형 도시군        Cluster 4 - 메트로폴리스 군집
+######      Cluster 4 - 메트로폴리스 군집
 
 **Cluster 2, 4 - 가장 잘 사는 지역 과세**
 - 맞벌이 비율은 낮지만 과세(소득), 아파트 등이 매우 높다. → 소득 수준이 높다고 판단된다.
